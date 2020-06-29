@@ -3,6 +3,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from myid import ID, PW
 import time
+import random
 
 driver = webdriver.Chrome('./chromedriver')
 
@@ -31,7 +32,7 @@ try:
 
     #searh
     search = driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/input')
-    search.send_keys('#젖소냥이')
+    search.send_keys('#집냥')
     time.sleep(5)
     search = driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]')
     feedCtn = driver.find_element_by_xpath('//*[@id="react-root"]/section/nav/div[2]/div/div/div[2]/div[2]/div[2]/div/a[1]/div/div/div[2]/span/span').text
@@ -46,16 +47,23 @@ try:
 
     time.sleep(5)
 
-    feedCtn = 10 #전체 피드 수 만큼 반복하시려면 feedCtn을 따로 지정하지 않고, 검색부분에서 가져온 feedCtn을 그대로 사용합니다.
+    feedCtn = 10
+    comm_list = [
+        '귀여워요!',
+        '넘 귀여워요!!',
+        '잘 보고갑니다!ㅎ',
+        '귀여워요!! 잘 보고갑니다!'
+    ]
     while True:
         #comment
         comm = driver.find_element_by_xpath('/html/body/div[4]/div[2]/div/article/div[2]/section[3]/div[1]/form/textarea')
+        ran_comm = random.choice(comm_list)
 
         ac = ActionChains(driver)
         ac.move_to_element(comm)
         ac.click()
         ac.pause(3)
-        ac.send_keys('귀여워요!')
+        ac.send_keys(ran_comm)
         ac.pause(1)
         ac.send_keys(Keys.ENTER)
         ac.perform()
